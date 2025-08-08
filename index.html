@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[Your Name] - UI/UX Designer Portfolio</title>
+  <title>Shreyash Bhagwat Portfolio</title>
   <link rel="stylesheet" href="./style.css">
+  <!-- Poppins Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <!-- EmailJS CDN -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
     (function(){
-      emailjs.init("wbkFGG8iIt0RK5phZ"); // Replace with your EmailJS public key
+      emailjs.init("wbkFGG8iIt0RK5phZ"); // Your EmailJS public key
     })();
   </script>
 </head>
@@ -17,13 +19,14 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="container">
-      <a href="#" class="logo">[Your Name]</a>
+      <a href="#" class="logo">Shreyash Bhagwat</a>
       <div class="nav-links">
         <a href="#home" class="nav-link">Home</a>
         <a href="#about" class="nav-link">About</a>
         <a href="#skills" class="nav-link">Skills</a>
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#contact" class="nav-link">Contact</a>
+        <a href="path/to/your-resume.pdf" download class="btn btn-secondary nav-btn">Download Resume</a>
       </div>
       <div class="hamburger">
         <span></span>
@@ -33,14 +36,40 @@
     </div>
   </nav>
 
-  <!-- Header Section -->
+  <!-- Header Section with Image Slider -->
   <header id="home" class="hero">
-    <div class="container">
+    <div class="slider">
+      <div class="slides">
+        <div class="slide active">
+          <img src="https://via.placeholder.com/1600x800?text=Showcase+1" alt="Showcase 1" class="slide-img">
+          <div class="slide-overlay">
+            <h2>Project Showcase 1</h2>
+            <p>Innovative UI/UX Design</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="https://via.placeholder.com/1600x800?text=Showcase+2" alt="Showcase 2" class="slide-img">
+          <div class="slide-overlay">
+            <h2>Project Showcase 2</h2>
+            <p>Seamless User Experience</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="https://via.placeholder.com/1600x800?text=Showcase+3" alt="Showcase 3" class="slide-img">
+          <div class="slide-overlay">
+            <h2>Project Showcase 3</h2>
+            <p>Modern Web Solutions</p>
+          </div>
+        </div>
+      </div>
+      <button class="slider-arrow prev">&larr;</button>
+      <button class="slider-arrow next">&rarr;</button>
+    </div>
+    <div class="container hero-content">
       <h1 class="hero-title">[Your Name]</h1>
       <p class="hero-subtitle">Crafting Seamless & Visually Stunning User Experiences</p>
       <div class="hero-buttons">
         <a href="#projects" class="btn btn-primary">Explore My Work</a>
-        <a href="path/to/your-resume.pdf" download class="btn btn-secondary">Download Resume</a>
       </div>
     </div>
   </header>
@@ -84,13 +113,11 @@
   <section id="projects" class="section projects">
     <div class="container">
       <h2 class="section-title">My Projects</h2>
-      <!-- Tabs -->
       <div class="tabs">
         <button class="tab-btn active" data-tab="uiux">UI/UX Projects</button>
         <button class="tab-btn" data-tab="webdev">Web Dev Projects</button>
         <button class="tab-btn" data-tab="appdev">App Dev Projects</button>
       </div>
-      <!-- Tab Content -->
       <div id="uiux" class="tab-content active">
         <div class="project-grid">
           <div class="project-card">
