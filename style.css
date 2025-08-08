@@ -1,7 +1,7 @@
 :root {
   --primary: #F5C426; /* Cream */
   --secondary: #FFFFFF; /* White */
-  --accent: #2DD4BF; /* Subtle Teal */
+  --accent: #F5C426; /* Subtle Teal */
   --background: #E5E7EB; /* Soft Neutral Gray */
   --text: #1A202C; /* Deep Gray */
 }
@@ -65,7 +65,7 @@ body {
 }
 
 .nav-link {
-  color: var(--text);
+  color: #1A202C;
   text-decoration: none;
   font-weight: 500;
   position: relative;
@@ -88,7 +88,7 @@ body {
 }
 
 .nav-link:hover {
-  color: var(--accent);
+  color: #F5C426;
 }
 
 .nav-btn {
@@ -97,6 +97,7 @@ body {
   font-size: 0.95rem;
   border-radius: 30px;
   color: var(--text)!important;
+  border-color: #1A202C !important; /* Download Resume button uses deep gray color */
   background: #F5C426 !important; /* Download Resume button uses cream color */
   color: var(--text);
   transform: scale(1);
@@ -140,12 +141,11 @@ body {
 
 /* Hero and Slider Styles */
 .hero {
+    width: 100%;
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+ 
   overflow: hidden;
 }
 
@@ -157,115 +157,25 @@ body {
   height: 100%;
   z-index: 1;
 }
-
-.slides {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s ease-in-out;
-}
-
-.slide {
-  flex: 0 0 100%;
-  display: none;
-  position: relative;
-}
-
-.slide.active {
-  display: block;
-}
-
 .slide-img {
+    margin-top: 90px;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.7);
-  transform: scale(1.1);
+   transform: scale(1.1);
   transition: transform 0.5s ease;
 }
 
-.slide.active .slide-img {
-  transform: scale(1);
-}
-
-.slide-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--secondary);
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.slide.active .slide-overlay {
-  opacity: 1;
-}
-
-.slide-overlay h2 {
-  font-size: 2.5rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.slide-overlay p {
-  font-size: 1.2rem;
-}
-
-.slider-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: var(--secondary);
-  border: none;
-  padding: 1.2rem;
-  cursor: pointer;
-  font-size: 2rem;
-  z-index: 2;
-  border-radius: 50%;
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.slider-arrow:hover {
-  background: var(--accent);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.prev {
-  left: 20px;
-}
-
-.next {
-  right: 20px;
-}
 
 .hero-content {
-  position: relative;
   z-index: 3;
+  left: 100px;
 }
 
-.hero-title {
-  font-size: 4.5rem;
-  font-weight: 700;
-  color: var(--secondary);
-  margin-bottom: 1rem;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  animation: fadeInDown 1.2s ease-out;
-}
-
-.hero-subtitle {
-  font-size: 1.5rem;
-  color: var(--secondary);
-  margin-bottom: 2rem;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  animation: fadeInUp 1.2s ease-out 0.2s;
-}
 
 .hero-buttons {
-  display: flex;
-  justify-content: center;
+    margin-top: 550px;
+    left: 100px;
+ 
+ 
   gap: 1.5rem;
 }
 
@@ -274,7 +184,7 @@ body {
   border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease;  
 }
 
 .btn-primary {
@@ -500,7 +410,7 @@ body {
 }
 
 .social-link {
-  color: var(--accent);
+  color: #4980ed !important;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease, transform 0.3s ease;
@@ -625,7 +535,7 @@ body {
   }
 
   .slider {
-    height: 60vh;
+    height: 100vh;
   }
 
   .slide-overlay h2 {
