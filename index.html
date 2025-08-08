@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[Your Name] - UI/UX Designer Portfolio</title>
+  <link rel="stylesheet" href="./style.css">
+  <!-- EmailJS CDN -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      emailjs.init("wbkFGG8iIt0RK5phZ"); // Replace with your EmailJS public key
+    })();
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="logo">[Your Name]</a>
+      <div class="nav-links">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <header id="home" class="hero">
+    <div class="container">
+      <h1 class="hero-title">[Your Name]</h1>
+      <p class="hero-subtitle">Crafting Seamless & Visually Stunning User Experiences</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">Explore My Work</a>
+        <a href="path/to/your-resume.pdf" download class="btn btn-secondary">Download Resume</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-text">
+        I'm a passionate UI/UX designer with over 5 years of experience creating intuitive, user-centered designs that blend functionality with aesthetics. My expertise spans user research, wireframing, prototyping, and delivering delightful experiences that resonate with users.
+      </p>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section skills">
+    <div class="container">
+      <h2 class="section-title">My Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3 class="skill-title">UI/UX Design</h3>
+          <p class="skill-desc">Crafting user-friendly interfaces with Figma, Sketch, and Adobe XD.</p>
+        </div>
+        <div class="skill-card">
+          <h3 class="skill-title">Prototyping</h3>
+          <p class="skill-desc">Building interactive prototypes to test and refine user flows.</p>
+        </div>
+        <div class="skill-card">
+          <h3 class="skill-title">User Research</h3>
+          <p class="skill-desc">Conducting user interviews and usability testing for data-driven design.</p>
+        </div>
+        <div class="skill-card">
+          <h3 class="skill-title">Front-End Development</h3>
+          <p class="skill-desc">Translating designs into code with HTML, CSS, and JavaScript.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section projects">
+    <div class="container">
+      <h2 class="section-title">My Projects</h2>
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="uiux">UI/UX Projects</button>
+        <button class="tab-btn" data-tab="webdev">Web Dev Projects</button>
+        <button class="tab-btn" data-tab="appdev">App Dev Projects</button>
+      </div>
+      <!-- Tab Content -->
+      <div id="uiux" class="tab-content active">
+        <div class="project-grid">
+          <div class="project-card">
+            <img src="https://via.placeholder.com/400x250" alt="UI/UX Project 1" class="project-img">
+            <h3 class="project-title">UI/UX Project 1</h3>
+            <p class="project-desc">Redesigned a mobile app to enhance user flow and accessibility, with a focus on minimalistic design.</p>
+          </div>
+          <div class="project-card">
+            <img src="https://via.placeholder.com/400x250" alt="UI/UX Project 2" class="project-img">
+            <h3 class="project-title">UI/UX Project 2</h3>
+            <p class="project-desc">Created an interactive dashboard for a SaaS platform, prioritizing usability and data visualization.</p>
+          </div>
+        </div>
+      </div>
+      <div id="webdev" class="tab-content">
+        <div class="project-grid">
+          <div class="project-card">
+            <img src="https://via.placeholder.com/400x250" alt="Web Dev Project 1" class="project-img">
+            <h3 class="project-title">Web Dev Project 1</h3>
+            <p class="project-desc">Developed a responsive e-commerce website with modern frameworks and smooth animations.</p>
+          </div>
+        </div>
+      </div>
+      <div id="appdev" class="tab-content">
+        <div class="project-grid">
+          <div class="project-card">
+            <img src="https://via.placeholder.com/400x250" alt="App Dev Project 1" class="project-img">
+            <h3 class="project-title">App Dev Project 1</h3>
+            <p class="project-desc">Built a fitness tracking app with real-time data and engaging user interactions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3 class="contact-title">Contact Details</h3>
+          <p><strong>Email:</strong> your.email@example.com</p>
+          <p><strong>Phone:</strong> +1 (123) 456-7890</p>
+          <p><strong>Location:</strong> [Your City, Country]</p>
+          <div class="social-links">
+            <a href="https://linkedin.com/in/yourprofile" target="_blank" class="social-link">LinkedIn</a>
+            <a href="https://behance.net/yourprofile" target="_blank" class="social-link">Behance</a>
+            <a href="https://dribbble.com/yourprofile" target="_blank" class="social-link">Dribbble</a>
+          </div>
+        </div>
+        <form id="contact-form" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
