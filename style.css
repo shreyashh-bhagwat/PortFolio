@@ -617,6 +617,7 @@ body {
   }
 
   .hero-content {
+    margin-top: 10px;
     padding: 0 .1rem;
   }
 
@@ -624,7 +625,7 @@ body {
     font-size: .7rem;
     width: 180px;
     height: 20px;
-    margin-top: 240px;
+    margin-top: 230px;
     margin-right: 180px;
     gap: 1rem;
     animation: float 3s ease-in-out infinite; /* Apply same multi-directional float animation */
@@ -649,12 +650,12 @@ body {
   }
 
   .hero {
-    margin-top: 0;
+    margin-top: -10px;
     min-height: 50vh;
   }
 
   .yellow-line {
-    margin-top: -6rem;
+    margin-top: -5rem;
     padding: 1rem 1rem;
   }
 
@@ -664,7 +665,7 @@ body {
   }
 
   .see-more-btn {
-    margin-top: 5px;
+    margin-top: 10px;
     width: 100px;
     align-items: right;
     padding: 0.4rem 1rem;
