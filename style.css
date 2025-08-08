@@ -27,9 +27,9 @@ body {
 
 /* Navbar Styles */
 .navbar {
-  background: rgba(255, 255, 255, 0.85); /* Enhanced glassmorphism with slight transparency */
-  backdrop-filter: blur(12px); /* Stronger blur for glass effect */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for depth */
+  background: rgb(255, 255, 255);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   color: var(--text);
   padding: 1.2rem 0;
   position: fixed;
@@ -40,8 +40,8 @@ body {
 }
 
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.95); /* Slightly more opaque on scroll */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Stronger shadow on scroll */
+  background: rgba(255, 255, 255, 0.594);
+  
 }
 
 .navbar .container {
@@ -92,14 +92,12 @@ body {
 }
 
 .nav-btn {
-    
   padding: 0.6rem 1.2rem;
   font-size: 0.95rem;
   border-radius: 30px;
-  color: var(--text)!important;
-  border-color: #1A202C !important; /* Download Resume button uses deep gray color */
-  background: #F5C426 !important; /* Download Resume button uses cream color */
-  color: var(--text);
+  color: var(--text) !important;
+  border-color: #1A202C !important;
+  background: #F5C426 !important;
   transform: scale(1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -139,13 +137,49 @@ body {
   display: flex;
 }
 
+/* Scroll to Top Button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary);
+  color: var(--text);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-to-top svg {
+  width: 24px;
+  height: 24px;
+}
+
 /* Hero and Slider Styles */
 .hero {
-    width: 100%;
+  margin-top: -60px;
+  width: 100%;
   position: relative;
   min-height: 100vh;
   display: flex;
- 
   overflow: hidden;
 }
 
@@ -157,26 +191,24 @@ body {
   height: 100%;
   z-index: 1;
 }
+
 .slide-img {
-    margin-top: 90px;
+  margin-top: 90px;
   width: 100%;
-   transform: scale(1.1);
+  transform: scale(1.1);
   transition: transform 0.5s ease;
 }
-
 
 .hero-content {
   z-index: 3;
   left: 100px;
 }
 
-
 .hero-buttons {
-    margin-top: 550px;
-    left: 100px;
- 
- 
+  margin-top: 620px;
+  margin-right: 1080px;
   gap: 1.5rem;
+  animation: float 3s ease-in-out infinite; /* Apply multi-directional float animation */
 }
 
 .btn {
@@ -184,11 +216,43 @@ body {
   border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s ease;  
+  transition: all 0.3s ease;
+}
+
+/* Multi-directional float animation */
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+    
+  }
+  25% {
+    transform: translate(-5px, -5px) scale(1.02); /* Move left and up, slight zoom */
+    
+  }
+  50% {
+    transform: translate(5px, -3px) scale(1.01); /* Move right and up */
+    
+  }
+  75% {
+    transform: translate(3px, 3px) scale(0.98); /* Move right and down, slight shrink */
+    
+  }
+  100% {
+    transform: translate(0, 0) scale(1); /* Return to original position */
+    
+  }
+}
+
+/* Optional hover effect */
+.btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  animation: none; /* Pause float animation on hover */
 }
 
 .btn-primary {
-  background: var(--primary);
+  background: white;
+  border: 2px solid var(--primary); /* Increased border weight by 1px */
   color: var(--text);
 }
 
@@ -196,11 +260,12 @@ body {
   background: #d4a51f;
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: none; /* Pause float animation on hover */
 }
 
 .btn-secondary {
   background: transparent;
-  border: 2px solid var(--secondary);
+  border: 3px solid var(--secondary); /* Increased border weight by 1px */
   color: var(--secondary);
 }
 
@@ -209,6 +274,33 @@ body {
   color: var(--text);
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: none; /* Pause float animation on hover */
+}
+
+/* Yellow Line */
+.yellow-line {
+  width: 100%;
+  height: 60px;
+  background: #F5C426;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem;
+}
+
+.line-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
+
+.see-more-btn {
+  font-size: .8rem;
+  border: 1px solid #000000;
+  color: rgb(0, 0, 0);
+  background: #F5C426;
+  padding: 0.5rem 1.5rem;
 }
 
 /* Section Styles */
@@ -492,6 +584,10 @@ body {
     flex-wrap: wrap;
   }
 
+    .logo {
+    font-size: 1.4rem; /* Reduced logo size */
+  }
+
   .nav-links {
     display: none;
     flex-direction: column;
@@ -509,52 +605,91 @@ body {
   }
 
   .hero-title {
-    font-size: 3rem;
+    font-size: 2.4rem;
+    text-align: center;
+    line-height: 1.2;
   }
 
   .hero-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 0 .2rem;
   }
 
-  .section-title {
-    font-size: 2.2rem;
+  .hero-content {
+    padding: 0 .1rem;
   }
 
   .hero-buttons {
-    flex-direction: column;
-    align-items: center;
+    font-size: .7rem;
+    width: 180px;
+    height: 20px;
+    margin-top: 240px;
+    margin-right: 180px;
+    gap: 1rem;
+    animation: float 3s ease-in-out infinite; /* Apply same multi-directional float animation */
   }
 
   .btn {
-    width: 100%;
+    width: 90%;
+    max-width: 300px;
     text-align: center;
+  }
+
+  .section-title {
+    font-size: 2rem;
   }
 
   .contact-grid {
     grid-template-columns: 1fr;
   }
 
-  .slider {
-    height: 100vh;
+  .section#about {
+    padding-top: 1rem;
   }
 
-  .slide-overlay h2 {
-    font-size: 1.8rem;
+  .hero {
+    margin-top: 0;
+    min-height: 50vh;
   }
 
-  .slide-overlay p {
-    font-size: 1rem;
+  .yellow-line {
+    margin-top: -6rem;
+    padding: 1rem 1rem;
   }
-}
 
-/* Scroll Animation Classes */
-.section-hidden {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
+  .line-title {
+    margin-top: 10px;
+    font-size: .8rem;
+  }
 
-.section-hidden.visible {
-  opacity: 1;
-  transform: translateY(0);
+  .see-more-btn {
+    margin-top: 5px;
+    width: 100px;
+    align-items: right;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    border: 1px solid #000000;
+    color: #000000;
+    background: #F5C426;
+    z-index: 10;
+    cursor: pointer;
+
+  }
+  .see-more-btn:hover,
+  .see-more-btn:focus,
+  .see-more-btn:active {
+    background: #d4a51f; /* Darker shade for feedback */
+    transform: scale(1.05); /* Subtle scaling */
+  }
+  
+  .scroll-to-top {
+    width: 40px;
+    height: 40px;
+  }
+
+  .scroll-to-top svg {
+    width: 20px;
+    height: 20px;
+  }
 }
