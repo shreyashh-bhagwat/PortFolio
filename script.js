@@ -20,19 +20,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Smooth Scroll for Navbar Links
-  document.querySelectorAll('.nav-link').forEach(link => {
+  // Smooth Scroll for Navbar Links and Hero Button
+  document.querySelectorAll('.nav-link, .hero-btn').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const targetId = link.getAttribute('href').substring(1);
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
         window.scrollTo({
-          top: targetElement.offsetTop - 100, // Adjust for navbar height
+          top: targetElement.offsetTop - 80,
           behavior: 'smooth'
         });
+        // Add bounce animation for hero button
+        if (link.classList.contains('hero-btn')) {
+          link.classList.add('bounce');
+          setTimeout(() => {
+            link.classList.remove('bounce');
+          }, 300);
+        }
       }
-      // Close mobile menu after clicking
       if (navLinks && hamburger) {
         navLinks.classList.remove('active');
         hamburger.classList.remove('open');
@@ -40,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Image Slider Functionality (unchanged, as no issues reported)
+  // Image Slider Functionality
   const slides = document.querySelectorAll('.slide');
   const prevArrow = document.querySelector('.prev');
   const nextArrow = document.querySelector('.next');
@@ -67,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initialize first slide
   if (slides.length > 0) {
     showSlide(currentSlide);
   }
@@ -92,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabContents = document.querySelectorAll('.tab-content');
 
   function initializeTabs() {
-    // Ensure the first tab is active on load
     if (tabButtons.length > 0 && tabContents.length > 0) {
       tabButtons[0].classList.add('active');
       tabContents[0].classList.add('active');
@@ -102,29 +106,23 @@ document.addEventListener('DOMContentLoaded', () => {
   tabButtons.forEach(button => {
     button.addEventListener('click', () => {
       const tabId = button.getAttribute('data-tab');
-      console.log('Tab clicked:', tabId); // Debug log
       if (!tabId) return;
 
-      // Remove active class from all buttons and contents
       tabButtons.forEach(btn => btn.classList.remove('active'));
       tabContents.forEach(content => content.classList.remove('active'));
 
-      // Add active class to clicked button and corresponding content
       button.classList.add('active');
       const targetContent = document.getElementById(tabId);
       if (targetContent) {
         targetContent.classList.add('active');
-      } else {
-        console.error('Tab content not found for ID:', tabId);
       }
     });
   });
 
-  // Initialize tabs on load
   initializeTabs();
 
   // Scroll to Top Button
-  const scrollToTopBtn = document.getElementById('scroll-to-top'); // Fixed ID
+  const scrollToTopBtn = document.getElementById('scroll-to-top');
   if (scrollToTopBtn) {
     window.addEventListener('scroll', () => {
       if (window.scrollY > 300) {
@@ -140,15 +138,18 @@ document.addEventListener('DOMContentLoaded', () => {
         behavior: 'smooth'
       });
     });
-  } else {
-    console.error('Scroll to top button not found');
   }
 
-  // EmailJS Form Submission
+  // EmailJS Form Submission with Button Animation
   const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
+  const sendBtn = document.querySelector('.send-btn');
+  if (contactForm && sendBtn) {
     contactForm.addEventListener('submit', function(event) {
       event.preventDefault();
+
+      // Disable button and show "Sending..."
+      sendBtn.disabled = true;
+      sendBtn.classList.add('sending');
 
       const formData = {
         name: this.name.value,
@@ -160,10 +161,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       emailjs.send('service_mhrrdwl', 'template_jixtgfh', formData)
         .then(() => {
-          alert('Message sent successfully!');
-          this.reset();
+          sendBtn.classList.remove('sending');
+          sendBtn.classList.add('success');
+          setTimeout(() => {
+            sendBtn.classList.remove('success');
+            sendBtn.disabled = false;
+            contactForm.reset();
+          }, 2000);
         }, (error) => {
+          sendBtn.classList.remove('sending');
           alert('Failed to send message: ' + JSON.stringify(error));
+          sendBtn.disabled = false;
         });
     });
   }
