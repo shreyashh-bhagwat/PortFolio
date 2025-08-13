@@ -192,7 +192,7 @@ body {
 
 /* Hero and Slider Styles */
 .hero {
-  z-index: 0; /* Changed from -10 to ensure clickability */
+  z-index: -2;
   margin-top: 0px;
   width: 100%;
   position: relative;
@@ -221,7 +221,7 @@ body {
   padding: 1.5rem;
   text-align: center;
   position: relative;
-  z-index: 1; /* Ensure content is above slider */
+
 }
 
 .hero-buttons {
@@ -387,7 +387,7 @@ body {
 
 /* Yellow Line */
 .yellow-line {
-  z-index: 2;
+  
   margin-top: -30px;
   width: 100%;
   height: 60px;
@@ -810,7 +810,7 @@ body {
   }
 
   .hero-buttons {
-    margin-top: 135px;
+    margin-top: 140px;
     max-width: 180px !important;
     margin-right: 190px;
     gap: 1rem;
@@ -823,7 +823,7 @@ body {
   }
 
   .yellow-line {
-    margin-top: -180px;
+    margin-top: -175px;
     height: 60px;
     padding: 1rem;
     justify-content: space-between;
@@ -992,9 +992,9 @@ body {
 
   .hero-buttons {
    
-    margin-top: 130px;
+    margin-top: 135px;
     margin-right: 200px;
-    max-width: 125px;
+    max-width: 120px;
     max-height: 10px;
   }
 
@@ -1004,7 +1004,7 @@ body {
   }
 
   .yellow-line {
-    margin-top: -185px;
+    margin-top: -183px;
     height: 60px;
   }
 
