@@ -1,5 +1,7 @@
 import bringit from '../assets/bringit.jpg';
 import smartharvest from '../assets/smarharvest.jpg';
+import showtime from '../assets/ShowTIme.png';
+import varadacademy from '../assets/varadacademy.png';
 
 export interface Project {
   id: string;
@@ -40,7 +42,7 @@ export const projects: Project[] = [
     id: 'p3',
     category: 'Web Dev',
     title: 'ShowTime - Ticket Booking',
-    thumbnail: '../assets/ShowTIme.png',
+    thumbnail: showtime,
     description: 'Full-stack web app with React.js, Node.js, and Razorpay payment integration.',
     tech: ['React.js', 'Node.js', 'Razorpay', 'Full-Stack'],
     views: 345,
@@ -51,7 +53,7 @@ export const projects: Project[] = [
     id: 'p4',
     category: 'Web Dev',
     title: 'Varad Academy - Education',
-    thumbnail: '../assets/varadacademy.png',
+    thumbnail: varadacademy,
     description: 'Responsive educational website with PHP, MySQL, and modern UI design.',
     tech: ['PHP', 'MySQL', 'Responsive Design', 'UI/UX'],
     views: 189,
