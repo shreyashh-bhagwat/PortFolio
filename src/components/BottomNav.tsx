@@ -18,7 +18,7 @@ const BottomNav = () => {
       transform: 'translateX(-50%)',
       width: '92%',
       maxWidth: '26.25rem',
-      zIndex: 50,
+      zIndex: 110,
     },
     navbar: {
       background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%)',
@@ -93,8 +93,16 @@ const BottomNav = () => {
     const tabIds = ['home', 'projects', 'contact'];
     
     const handleScroll = () => {
+      const scrollY = window.scrollY;
+      
+      // Special case: if near top, activate home
+      if (scrollY < 200) {
+        setActiveTab('home');
+        return;
+      }
+      
       const sections = tabIds.map(id => document.getElementById(id));
-      const scrollPosition = window.scrollY + window.innerHeight / 2; // Use viewport center
+      const scrollPosition = scrollY + window.innerHeight / 2; // Use viewport center
 
       let currentActiveTab = 'home'; // Default to home
 
@@ -170,12 +178,13 @@ const BottomNav = () => {
       const section = document.getElementById(tabId);
       if (section) {
         // Get the navbar element to calculate its actual height
-        const navbar = document.querySelector('[style*="position: fixed"][style*="bottom: 1rem"]') as HTMLElement;
+        const navbar = document.querySelector('.bottom-nav-container') as HTMLElement;
         const navbarHeight = navbar ? navbar.offsetHeight + 20 : 140; // Default with padding
         
-        // Calculate the target scroll position
-        const sectionTop = section.offsetTop;
-        const targetScrollTop = Math.max(0, sectionTop - navbarHeight);
+        // Calculate the target scroll position using getBoundingClientRect for accuracy
+        const rect = section.getBoundingClientRect();
+        const absoluteTop = window.pageYOffset + rect.top;
+        const targetScrollTop = Math.max(0, absoluteTop - navbarHeight);
         
         // Use smooth scrolling with better easing
         window.scrollTo({
@@ -192,7 +201,7 @@ const BottomNav = () => {
   };
 
   return (
-    <div style={styles.container}>
+    <div style={styles.container} className="bottom-nav-container">
       {/* Mobile app-style navbar with frosted glass background */}
       <div style={styles.navbar}>
         <div style={styles.tabContainer}>

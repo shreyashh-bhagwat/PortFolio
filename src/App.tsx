@@ -5,8 +5,6 @@ import ProjectsSection from './components/ProjectsSection';
 import ContactSection from './components/ContactSection';
 import BusinessProjectSection from './components/BusinessProjectSection';
 import SocialLinksSection from './components/SocialLinksSection';
-import DinoGame from './components/DinoGame';
-import TechStackSection from './components/TechStackSection';
 import Footer from './components/Footer';
 import HireMeSection from './components/HireMeSection';
 import bgVideo from './assets/bg.mp4';
@@ -35,24 +33,23 @@ function App() {
         <HeroChatCard />
       </section>
 
-      <div className="relative z-35">
+      <div className="relative z-30">
         <SocialLinksSection />
       </div>
-      <div className="relative z-30">
+      <div className="relative z-40">
         <ProjectsSection />
       </div>
-      <BusinessProjectSection />
-      <DinoGame />
-      <TechStackSection />
-      <div className="relative z-40">
+      <div className="relative z-35">
+        <BusinessProjectSection />
+      </div>
+      <div className="relative z-60">
+        <HireMeSection />
+      </div>
+      <div className="relative z-50">
         <ContactSection />
       </div>
 
-      <div className="relative z-45">
-        <HireMeSection />
-      </div>
-
-      <div className="relative z-50">
+      <div className="relative z-70">
         <Footer />
       </div>
 

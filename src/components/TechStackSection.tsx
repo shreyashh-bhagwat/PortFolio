@@ -16,7 +16,7 @@ const TechStackSection = () => {
 
   return (
     <motion.section 
-      className="py-12 px-4 relative z-30"
+      className="py-12 px-4 relative"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
@@ -24,7 +24,7 @@ const TechStackSection = () => {
     >
       <div className="max-w-6xl mx-auto">
         <motion.div 
-          className="text-center mb-12 relative z-40"
+          className="text-center mb-12 relative"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}

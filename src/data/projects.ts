@@ -10,6 +10,7 @@ export interface Project {
   tech: string[];
   views: number;
   likes: number;
+  href?: string;
 }
 
 export const projects: Project[] = [
@@ -22,6 +23,7 @@ export const projects: Project[] = [
     tech: ['Figma', 'UI/UX Design', 'Prototyping'],
     views: 267,
     likes: 89,
+    href: 'https://www.behance.net/gallery/12345678/Bring-It-Quick-Commerce-App',
   },
   {
     id: 'p2',
@@ -32,6 +34,7 @@ export const projects: Project[] = [
     tech: ['Figma', 'UI Design', 'Dashboard Design'],
     views: 198,
     likes: 67,
+    href: 'https://www.behance.net/gallery/12345679/SmartHarvest-Tax-Platform',
   },
   {
     id: 'p3',
@@ -42,6 +45,7 @@ export const projects: Project[] = [
     tech: ['React.js', 'Node.js', 'Razorpay', 'Full-Stack'],
     views: 345,
     likes: 112,
+    href: 'https://github.com/shreyashh-bhagwat/showtime-ticket-booking',
   },
   {
     id: 'p4',
@@ -52,5 +56,6 @@ export const projects: Project[] = [
     tech: ['PHP', 'MySQL', 'Responsive Design', 'UI/UX'],
     views: 189,
     likes: 43,
+    href: 'https://varadacademy.com',
   },
 ];

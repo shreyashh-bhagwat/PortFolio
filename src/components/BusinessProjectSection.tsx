@@ -20,8 +20,7 @@ const BusinessProjectSection = () => {
             />
           </div>
           <div className="mb-8">
-            <p className="text-white text-lg mb-4 font-medium">तुमच्या व्यवसायासाठी वेबसाईट आणि ॲप – तयार करून मिळेल!</p>
-            <p className="text-white text-lg mb-4 font-medium">आपके व्यवसाय के लिए वेबसाइट और ऐप – तैयार करके मिलेगा!</p>
+           
             <p className="text-white text-lg mb-6 font-medium">Website & App for your business – delivered ready-to-use!</p>
           </div>
           <button

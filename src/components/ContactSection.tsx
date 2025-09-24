@@ -97,7 +97,7 @@ const ContactSection = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 bg-white/20 border border-white/20 rounded text-white placeholder-gray-300 focus:outline-none focus:border-blue-400"
+                className="w-full px-3 py-2 bg-white/20 border border-white/20 rounded text-white placeholder-gray-300 focus:outline-none focus:border-blue-400 text-base"
                 placeholder="Your Name"
               />
             </div>
@@ -110,7 +110,7 @@ const ContactSection = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 bg-white/20 border border-white/20 rounded text-white placeholder-gray-300 focus:outline-none focus:border-blue-400"
+                className="w-full px-3 py-2 bg-white/20 border border-white/20 rounded text-white placeholder-gray-300 focus:outline-none focus:border-blue-400 text-base"
                 placeholder="your@email.com"
               />
             </div>
@@ -123,7 +123,7 @@ const ContactSection = () => {
               value={formData.subject}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 bg-white/20 border border-white/20 rounded text-white placeholder-gray-300 focus:outline-none focus:border-blue-400"
+              className="w-full px-3 py-2 bg-white/20 border border-white/20 rounded text-white placeholder-gray-300 focus:outline-none focus:border-blue-400 text-base"
             >
               <option value="">Select Project Type</option>
               <option value="UI/UX Design">UI/UX Design</option>
@@ -141,7 +141,7 @@ const ContactSection = () => {
               onChange={handleChange}
               required
               rows={5}
-              className="w-full px-3 py-2 bg-white/20 border border-white/20 rounded text-white placeholder-gray-300 focus:outline-none focus:border-blue-400 resize-none"
+              className="w-full px-3 py-2 bg-white/20 border border-white/20 rounded text-white placeholder-gray-300 focus:outline-none focus:border-blue-400 resize-none text-base"
               placeholder="Your message..."
             />
           </div>
@@ -157,7 +157,7 @@ const ContactSection = () => {
 
       {/* Success Modal */}
       {showSuccessModal && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-md flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-md flex items-center justify-center z-[120] p-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}

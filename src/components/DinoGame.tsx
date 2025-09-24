@@ -69,9 +69,8 @@ const DinoGame = () => {
           startGame();
         } else if (isGameOver) {
           startGame();
-        } else {
-          jump();
         }
+        // Spacebar no longer handles jumping - use JUMP button instead
       }
     };
 
@@ -85,15 +84,20 @@ const DinoGame = () => {
       }
     };
 
+    const handleClick = (event: MouseEvent) => {
+      event.preventDefault();
+      handleTouch();
+    };
+
     document.addEventListener('keydown', handleKeyPress);
     const gameElement = gameRef.current;
     gameElement?.addEventListener('touchstart', handleTouch);
-    gameElement?.addEventListener('click', handleTouch);
+    gameElement?.addEventListener('click', handleClick);
 
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
       gameElement?.removeEventListener('touchstart', handleTouch);
-      gameElement?.removeEventListener('click', handleTouch);
+      gameElement?.removeEventListener('click', handleClick);
     };
   }, [jump, startGame, isGameRunning, isGameOver]);
 
@@ -224,12 +228,12 @@ const DinoGame = () => {
           <h2 className="text-3xl font-bold text-white mb-3 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
             🎮 Take a Break, Play Game!
           </h2>
-          <p className="text-gray-400">Classic dinosaur runner game - tap or press space to jump</p>
+          <p className="text-gray-400">Classic dinosaur runner game - use the JUMP button to jump, press space to start/restart</p>
         </motion.div>
 
         <motion.div
           ref={gameRef}
-          className="relative bg-white rounded-xl overflow-hidden shadow-xl border-2 border-gray-300 cursor-pointer select-none mx-auto"
+          className="relative bg-white rounded-xl overflow-hidden shadow-xl border-2 border-gray-300 cursor-pointer select-none mx-auto hover:shadow-2xl transition-shadow duration-300"
           style={{ maxWidth: '600px' }}
           initial={{ scale: 0.95 }}
           whileInView={{ scale: 1 }}
@@ -269,7 +273,7 @@ const DinoGame = () => {
                 <div className="text-gray-600 text-lg mb-2 font-mono">GAME OVER</div>
                 <div className="text-gray-800 text-2xl mb-1 font-mono">{Math.floor(score / 10)}</div>
                 <div className="text-gray-500 text-sm mb-4 font-mono">HI {Math.floor(highScore / 10)}</div>
-                <div className="text-gray-600 text-xs font-mono">Tap screen or press SPACE to restart</div>
+                <div className="text-gray-600 text-xs font-mono">Press SPACE to restart, use JUMP button to play</div>
               </div>
             </div>
           )}
@@ -278,12 +282,30 @@ const DinoGame = () => {
           {!isGameRunning && !isGameOver && (
             <div className="absolute inset-0 flex items-center justify-center bg-white/90">
               <div className="text-center">
-                <div className="text-gray-600 text-lg mb-4 font-mono">Tap screen or press SPACE to play</div>
+                <div className="text-gray-600 text-lg mb-4 font-mono">Press SPACE to start, use JUMP button to play</div>
                 <div className="text-gray-500 text-xs font-mono">HI {Math.floor(highScore / 10)}</div>
               </div>
             </div>
           )}
         </motion.div>
+
+        {/* Jump Button Below Game */}
+        <div className="flex justify-center mt-4">
+          <button
+            onClick={() => {
+              if (!isGameRunning && !isGameOver) {
+                startGame();
+              } else if (isGameOver) {
+                startGame();
+              } else {
+                jump();
+              }
+            }}
+            className="bg-white hover:bg-gray-100 text-black px-6 py-3 rounded-lg font-semibold text-lg shadow-lg border-2 border-gray-300 active:scale-95 transition-all duration-150"
+          >
+            🦘 JUMP
+          </button>
+        </div>
       </div>
     </motion.section>
   );
