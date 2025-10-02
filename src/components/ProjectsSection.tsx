@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { projects } from '../data/projects';
 import type { Project } from '../data/projects';
 
@@ -7,6 +8,7 @@ const ProjectsSection = () => {
   const [filter, setFilter] = useState<string>('UI/UX');
   const [showConfirmModal, setShowConfirmModal] = useState<Project | null>(null);
   const [likedProjects, setLikedProjects] = useState<Set<string>>(new Set());
+  const navigate = useNavigate();
 
   const filteredProjects = filter === 'All' ? projects : projects.filter(p => p.category === filter);
 
@@ -47,7 +49,7 @@ const ProjectsSection = () => {
   }, [showConfirmModal]);
 
   return (
-  <section id="projects" className="mt-0 pt-0 px-4 pb-12">
+  <section id="projects" className="py-6 px-4 lg:pb-12">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-white text-center mb-10">Projects</h2>
 
@@ -120,46 +122,46 @@ const ProjectsSection = () => {
       </div>
 
       {/* Confirmation Modal */}
-      {showConfirmModal && (
-        <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 w-screen h-screen bg-black/80 backdrop-blur-xl flex items-center justify-center z-[999999] p-4 overflow-hidden"
-             style={{ 
-               position: 'fixed',
-               width: '100vw',
-               height: '100vh',
-               minHeight: '100vh',
-               margin: 0,
-               padding: '1rem'
-             }}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="bg-black/90 backdrop-blur-xl border-2 border-white/30 rounded-2xl p-6 max-w-sm w-full mx-4 shadow-2xl"
-            style={{
-              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
-            }}
-          >
+      <AnimatePresence>
+        {showConfirmModal && (
+          <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 w-screen h-screen bg-black/80 backdrop-blur-xl flex items-center justify-center z-[999999] p-4 overflow-hidden"
+               style={{ 
+                 position: 'fixed',
+                 width: '100vw',
+                 height: '100vh',
+                 minHeight: '100vh',
+                 margin: 0,
+                 padding: '1rem'
+               }}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative bg-black/90 backdrop-blur-xl border-2 border-white/30 rounded-2xl p-6 max-w-sm w-full mx-4 shadow-2xl"
+              style={{
+                boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+              }}
+            >
             <div className="text-center">
-              {/* Close X button at top left */}
+              {/* Close X button at top right */}
               <button
                 onClick={() => setShowConfirmModal(null)}
-                className="absolute top-4 left-4 w-8 h-8 flex items-center justify-center text-white hover:text-gray-300 transition-colors duration-200"
+                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-white hover:text-gray-300 transition-colors duration-200 z-[9999] bg-transparent border-none outline-none p-0"
+                style={{
+                  position: 'absolute',
+                  top: '1rem',
+                  right: '1rem',
+                  background: 'transparent',
+                  border: 'none',
+                  outline: 'none',
+                  color: 'white',
+                  fontSize: '24px',
+                  fontWeight: 'bold'
+                }}
                 aria-label="Close"
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                ×
               </button>
 
               {/* Animated Project Illustration */}
@@ -226,12 +228,17 @@ const ProjectsSection = () => {
               >
                 <button
                   onClick={() => {
-                    if (showConfirmModal.href) {
-                      window.open(showConfirmModal.href, '_blank');
+                    if (showConfirmModal.demoVideoUrl) {
+                      // Check if it's a placeholder URL (contains 'demo-')
+                      if (showConfirmModal.demoVideoUrl.includes('demo-')) {
+                        navigate('/404');
+                      } else {
+                        window.open(showConfirmModal.demoVideoUrl, '_blank');
+                      }
                     }
                     setShowConfirmModal(null);
                   }}
-                  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 active:from-purple-700 active:to-purple-800 text-white rounded-xl transition-all duration-200 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95"
+                  className="flex items-center gap-2 px-6 py-3 bg-gray-700 hover:bg-gray-600 active:bg-gray-800 text-white rounded-xl transition-all duration-200 font-semibold text-sm shadow-sm hover:shadow-md transform hover:scale-105 active:scale-95"
                 >
                   <svg
                     className="w-5 h-5"
@@ -249,7 +256,7 @@ const ProjectsSection = () => {
                     }
                     setShowConfirmModal(null);
                   }}
-                  className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 active:from-emerald-700 active:to-emerald-800 text-white rounded-xl transition-all duration-200 font-semibold text-sm shadow-sm hover:shadow-md transform hover:scale-105 active:scale-95"
+                  className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white rounded-xl transition-all duration-200 font-semibold text-sm shadow-sm hover:shadow-md transform hover:scale-105 active:scale-95"
                 >
                   Open Project
                 </button>
@@ -258,6 +265,7 @@ const ProjectsSection = () => {
           </motion.div>
         </div>
       )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -1,27 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import logo from '../assets/logo.png';
 
 const HeroChatCard = () => {
   const [displayText, setDisplayText] = useState('');
-  const [showTyping, setShowTyping] = useState(true);
   const fullText = "Hi — I'm Shreyash. I'm a UI/UX Designer & Frontend Developer from Kopargaon, Maharashtra. With 2+ years of experience and 50+ completed projects, I design clean, user-first interfaces that convert.";
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Add CSS animations to head
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
-      @keyframes bounce {
-        0%, 100% {
-          transform: translateY(-25%);
-          animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-        }
-        50% {
-          transform: translateY(0);
-          animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-        }
-      }
       @keyframes pulse {
         0%, 100% { opacity: 1; }
         50% { opacity: 0.5; }
@@ -61,7 +51,6 @@ const HeroChatCard = () => {
       boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.05)',
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       position: 'relative' as const,
-      overflow: 'hidden' as const,
       maxWidth: '24rem',
     },
     avatar: {
@@ -80,17 +69,6 @@ const HeroChatCard = () => {
       height: '100%',
       objectFit: 'cover' as const,
     },
-    typingContainer: {
-      display: 'flex',
-      gap: '0.25rem',
-    },
-    typingDot: {
-      width: '0.5rem',
-      height: '0.5rem',
-      backgroundColor: '#9ca3af',
-      borderRadius: '50%',
-      animation: 'bounce 1s infinite',
-    },
     text: {
       color: '#ffffff',
       fontSize: '0.875rem',
@@ -100,29 +78,51 @@ const HeroChatCard = () => {
     cursor: {
       animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
     },
+    audioButton: {
+      position: 'absolute' as const,
+      bottom: '0.5rem',
+      right: '0.5rem',
+      background: 'rgba(255, 0, 0, 0.8)', // Temporary red background for debugging
+      borderRadius: '50%',
+      width: '3rem',
+      height: '3rem',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      cursor: 'pointer',
+      transition: 'all 0.2s ease',
+      zIndex: 20,
+    },
   };
 
+  // Typing animation effect
   useEffect(() => {
-    if (prefersReducedMotion) {
-      setShowTyping(false);
-      setDisplayText(fullText);
-      return;
+    let i = 0;
+    const typeTimer = setInterval(() => {
+      if (i < fullText.length) {
+        setDisplayText(fullText.slice(0, i + 1));
+        i++;
+      } else {
+        clearInterval(typeTimer);
+        setIsTypingComplete(true);
+      }
+    }, 30); // Speed of typing (30ms per character)
+
+    return () => clearInterval(typeTimer);
+  }, [fullText]);
+
+  // Toggle mute/unmute function
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+      setIsMuted(!isMuted);
     }
-    const timer = setTimeout(() => {
-      setShowTyping(false);
-      let i = 0;
-      const typeTimer = setInterval(() => {
-        if (i < fullText.length) {
-          setDisplayText(fullText.slice(0, i + 1));
-          i++;
-        } else {
-          clearInterval(typeTimer);
-        }
-      }, 50);
-      return () => clearInterval(typeTimer);
-    }, 800);
-    return () => clearTimeout(timer);
-  }, [prefersReducedMotion]);
+  };
 
   return (
     <motion.div
@@ -130,7 +130,7 @@ const HeroChatCard = () => {
       animate={{ 
         opacity: 1, 
         y: 0,
-        marginTop: showTyping ? '0' : '7%'
+        marginTop: '7%'
       }}
       transition={{ 
         duration: 0.8,
@@ -138,27 +138,74 @@ const HeroChatCard = () => {
       }}
       style={{
         ...styles.container,
-        ...(showTyping ? styles.containerCentered : styles.containerTop),
+        ...styles.containerTop,
       }}
     >
       {/* Chat Bubble */}
       <div style={styles.card}>
-        {/* Profile Picture inside bubble */}
+        {/* Audio Button - Shows after typing completes */}
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isTypingComplete ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          onClick={toggleAudio}
+          style={styles.audioButton}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(0, 0, 0, 0.5)';
+            e.currentTarget.style.transform = 'scale(1.1)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(0, 0, 0, 0.3)';
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+          aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
+        >
+          {isMuted ? (
+            // Temporary text icon for debugging
+            <span style={{ color: '#ffffff', fontSize: '24px', fontWeight: 'bold' }}>🔇</span>
+          ) : (
+            // Temporary text icon for debugging
+            <span style={{ color: '#ffffff', fontSize: '24px', fontWeight: 'bold' }}>🔊</span>
+          )}
+        </motion.button>        {/* Profile Picture inside bubble */}
         <div style={styles.avatar}>
           <img src={logo} alt="Shreyash Bhagwat" style={styles.avatarImage} />
         </div>
-        {showTyping ? (
-          <div style={styles.typingContainer}>
-            <div style={{ ...styles.typingDot, animationDelay: '0s' }}></div>
-            <div style={{ ...styles.typingDot, animationDelay: '0.1s' }}></div>
-            <div style={{ ...styles.typingDot, animationDelay: '0.2s' }}></div>
-          </div>
-        ) : (
-          <p style={styles.text}>
-            {displayText}
-            <span style={styles.cursor}>|</span>
-          </p>
-        )}
+        <p style={styles.text}>
+          {displayText}
+          {isTypingComplete && <span style={styles.cursor}>|</span>}
+          {isTypingComplete && (
+            <>
+              <br />
+              <br />
+              <motion.span
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                style={{
+                  display: 'inline-block',
+                  marginTop: '0.5rem',
+                  fontSize: '0.75rem',
+                  color: '#9ca3af',
+                  fontStyle: 'italic'
+                }}
+              >
+                Click the speaker to hear my introduction in मराठी 🎵
+              </motion.span>
+            </>
+          )}
+        </p>
+
+        {/* Hidden audio element */}
+        <audio
+          ref={audioRef}
+          preload="none"
+          onEnded={() => setIsMuted(true)}
+        >
+          <source src="/assets/audio/intro.mp3" type="audio/mpeg" />
+          <source src="/assets/audio/intro.wav" type="audio/wav" />
+          Your browser does not support the audio element.
+        </audio>
       </div>
     </motion.div>
   );

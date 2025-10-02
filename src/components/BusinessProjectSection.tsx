@@ -9,7 +9,7 @@ const BusinessProjectSection = () => {
   };
 
   return (
-    <section className="section-spacing px-4">
+    <section className="py-6 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="card-elevated p-8 text-center">
           <div className="mb-6">

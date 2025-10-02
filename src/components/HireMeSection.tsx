@@ -13,7 +13,7 @@ const HireMeSection = () => {
 
   return (
     <motion.section
-      className="py-16 px-4 lg:px-0 lg:py-8"
+      className="py-6 px-4 lg:px-0 lg:py-8"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}

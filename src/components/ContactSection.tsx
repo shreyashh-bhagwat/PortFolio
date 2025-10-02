@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import confetti from 'canvas-confetti';
 
@@ -99,7 +99,7 @@ const ContactSection = () => {
   };
 
   return (
-  <section id="contact" className="section-spacing px-4 pb-32 mb-24 lg:px-0 lg:py-8 lg:pb-16 lg:mb-8">
+  <section id="contact" className="py-6 px-4 pb-32 mb-24 lg:px-0 lg:py-8 lg:pb-16 lg:mb-8">
       <div className="max-w-2xl mx-auto lg:max-w-none">
         <h2 className="text-3xl font-bold text-white text-center lg:text-left mb-10 lg:mb-8">Contact Me</h2>
 
@@ -178,26 +178,27 @@ const ContactSection = () => {
       </div>
 
       {/* Success Modal */}
-      {showSuccessModal && (
-        <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 w-screen h-screen bg-black/80 backdrop-blur-xl flex items-center justify-center z-[999999] p-4 overflow-hidden"
-             style={{ 
-               position: 'fixed',
-               width: '100vw',
-               height: '100vh',
-               minHeight: '100vh',
-               margin: 0,
-               padding: '1rem'
-             }}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="bg-black/90 backdrop-blur-xl border border-white/25 rounded-2xl p-6 max-w-sm w-full mx-4 shadow-2xl"
-            style={{
-              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
-            }}
-          >
+      <AnimatePresence>
+        {showSuccessModal && (
+          <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 w-screen h-screen bg-black/80 backdrop-blur-xl flex items-center justify-center z-[999999] p-4 overflow-hidden"
+               style={{ 
+                 position: 'fixed',
+                 width: '100vw',
+                 height: '100vh',
+                 minHeight: '100vh',
+                 margin: 0,
+                 padding: '1rem'
+               }}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="bg-black/90 backdrop-blur-xl border border-white/25 rounded-2xl p-6 max-w-sm w-full mx-4 shadow-2xl"
+              style={{
+                boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+              }}
+            >
             <div className="text-center">
               {/* Animated Done Illustration */}
               <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
@@ -270,6 +271,7 @@ const ContactSection = () => {
           </motion.div>
         </div>
       )}
+      </AnimatePresence>
     </section>
   );
 };

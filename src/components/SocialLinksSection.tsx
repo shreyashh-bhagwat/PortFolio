@@ -1,6 +1,6 @@
 const SocialLinksSection = () => {
   return (
-    <section className="section-spacing px-4 lg:px-0 lg:py-8">
+    <section className="py-6 px-4 lg:px-0 lg:py-8">
       <div className="max-w-6xl mx-auto text-center lg:text-left">
         <h2 className="text-3xl font-bold text-white mb-10 lg:mb-8">Connect With Me</h2>
         <div className="grid grid-cols-2 gap-4 max-w-md mx-auto lg:max-w-none lg:grid-cols-1 lg:gap-3">
