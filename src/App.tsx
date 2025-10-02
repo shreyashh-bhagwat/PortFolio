@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import AnimatedBackground from './components/AnimatedBackground';
 import HeroChatCard from './components/HeroChatCard';
 import BottomNav from './components/BottomNav';
@@ -7,11 +8,26 @@ import BusinessProjectSection from './components/BusinessProjectSection';
 import SocialLinksSection from './components/SocialLinksSection';
 import Footer from './components/Footer';
 import HireMeSection from './components/HireMeSection';
+import LoadingScreen from './components/LoadingScreen';
 import bgVideo from './assets/bg.mp4';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
+
+  const handleLoadComplete = () => {
+    setIsLoading(false);
+    // Smooth delay for elegant fade-in transition
+    setTimeout(() => {
+      setShowContent(true);
+    }, 300);
+  };
+
   return (
-    <div className="min-h-screen app-bg relative">
+    <>
+      {isLoading && <LoadingScreen onLoadComplete={handleLoadComplete} />}
+      {!isLoading && (
+        <div className={`min-h-screen app-bg relative transition-all duration-1500 ease-out ${showContent ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'}`}>
       {/* Background Video */}
       <video
         autoPlay
@@ -28,25 +44,64 @@ function App() {
 
       <AnimatedBackground />
 
-      {/* Hero Section */}
-      <section id="home" className="flex items-start justify-center px-4 pb-0 pt-[7vh] mb-0 relative z-20">
-        <HeroChatCard />
+      {/* Row 1: Hero Section (left) + Connect With Me (right) */}
+      <section id="home" className="px-4 pb-0 pt-[7vh] mb-0 relative z-20">
+        <div className="max-w-7xl mx-auto">
+          {/* Mobile Layout */}
+          <div className="lg:hidden flex items-start justify-center">
+            <HeroChatCard />
+          </div>
+          
+          {/* Desktop Layout */}
+          <div className="hidden lg:grid lg:grid-cols-2 lg:gap-12 lg:items-start">
+            <div className="flex justify-center">
+              <HeroChatCard />
+            </div>
+            <div className="relative z-30">
+              <SocialLinksSection />
+            </div>
+          </div>
+        </div>
       </section>
 
-      <div className="relative z-30">
+      {/* Mobile Connect With Me (only shown on mobile) */}
+      <div className="lg:hidden relative z-30">
         <SocialLinksSection />
       </div>
+
+      {/* Row 2: Projects Section */}
       <div className="relative z-40">
         <ProjectsSection />
       </div>
+
+      {/* Row 3: Business Projects Section */}
       <div className="relative z-35">
         <BusinessProjectSection />
       </div>
-      <div className="relative z-60">
-        <HireMeSection />
-      </div>
-      <div className="relative z-50">
-        <ContactSection />
+
+      {/* Row 4: Hire Me (left) + Contact Form (right) */}
+      <div className="relative z-50 px-4">
+        <div className="max-w-7xl mx-auto">
+          {/* Mobile Layout */}
+          <div className="lg:hidden">
+            <div className="relative z-60">
+              <HireMeSection />
+            </div>
+            <div className="relative z-50">
+              <ContactSection />
+            </div>
+          </div>
+          
+          {/* Desktop Layout */}
+          <div className="hidden lg:grid lg:grid-cols-2 lg:gap-12 lg:items-start">
+            <div className="relative z-60">
+              <HireMeSection />
+            </div>
+            <div className="relative z-50">
+              <ContactSection />
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="relative z-70">
@@ -55,6 +110,8 @@ function App() {
 
       <BottomNav />
     </div>
+      )}
+    </>
   );
 }
 

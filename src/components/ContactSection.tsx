@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import confetti from 'canvas-confetti';
@@ -24,6 +24,28 @@ const ContactSection = () => {
     window.open(whatsappUrl, '_blank');
     setShowSuccessModal(false);
   };
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (showSuccessModal) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.height = '100%';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
+    };
+  }, [showSuccessModal]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,9 +99,9 @@ const ContactSection = () => {
   };
 
   return (
-  <section id="contact" className="section-spacing px-4 pb-32 mb-24">
-      <div className="max-w-2xl mx-auto">
-        <h2 className="text-3xl font-bold text-white text-center mb-10">Contact Me</h2>
+  <section id="contact" className="section-spacing px-4 pb-32 mb-24 lg:px-0 lg:py-8 lg:pb-16 lg:mb-8">
+      <div className="max-w-2xl mx-auto lg:max-w-none">
+        <h2 className="text-3xl font-bold text-white text-center lg:text-left mb-10 lg:mb-8">Contact Me</h2>
 
         <motion.form
           initial={{ opacity: 0, y: 20 }}
@@ -87,7 +109,7 @@ const ContactSection = () => {
           onSubmit={handleSubmit}
           className="card-elevated p-6"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 mb-4">
             <div>
               <label htmlFor="name" className="block text-white mb-2">Name</label>
               <input
@@ -157,7 +179,15 @@ const ContactSection = () => {
 
       {/* Success Modal */}
       {showSuccessModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-xl flex items-center justify-center z-[120] p-4">
+        <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 w-screen h-screen bg-black/80 backdrop-blur-xl flex items-center justify-center z-[999999] p-4 overflow-hidden"
+             style={{ 
+               position: 'fixed',
+               width: '100vw',
+               height: '100vh',
+               minHeight: '100vh',
+               margin: 0,
+               padding: '1rem'
+             }}>
           <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
