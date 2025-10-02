@@ -16,14 +16,9 @@ import bgVideo from './assets/bg.mp4';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [showContent, setShowContent] = useState(false);
 
   const handleLoadComplete = () => {
     setIsLoading(false);
-    // Smooth delay for elegant fade-in transition
-    setTimeout(() => {
-      setShowContent(true);
-    }, 300);
   };
 
   return (
@@ -32,7 +27,7 @@ function App() {
         <div>
           {isLoading && <LoadingScreen onLoadComplete={handleLoadComplete} />}
           {!isLoading && (
-            <div>
+            <div className="pb-32">
               {/* Background Video */}
               <video
                 autoPlay
