@@ -185,7 +185,7 @@ const HeroChatCard = () => {
                 style={{
                   display: 'inline-block',
                   marginTop: '0.5rem',
-                  fontSize: '0.75rem',
+                  fontSize: '0.625rem',
                   color: '#9ca3af',
                   fontStyle: 'italic'
                 }}
