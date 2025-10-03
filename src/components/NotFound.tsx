@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import notFoundImage from '../assets/404.png';
 
 const NotFound = () => {
   const navigate = useNavigate();
 
-  const monkeyVariants = {
+  const illustrationVariants = {
     initial: { y: -20, rotate: 0 },
     animate: {
       y: [0, -20, 0],
@@ -58,23 +59,24 @@ const NotFound = () => {
       </div>
 
       <div className="text-center relative z-10 max-w-md mx-auto">
-        {/* Monkey Animation */}
+        {/* 404 Illustration */}
         <motion.div
-          variants={monkeyVariants}
+          variants={illustrationVariants}
           initial="initial"
           animate="animate"
           className="mb-8"
         >
-          <div className="text-9xl mb-4">🐒</div>
+          <img 
+            src={notFoundImage} 
+            alt="404 Not Found Illustration" 
+            className="w-64 h-64 mx-auto object-contain"
+          />
         </motion.div>
 
         {/* 404 Text */}
         <motion.div variants={textVariants} initial="initial" animate="animate">
-          <h1 className="text-8xl font-bold text-white mb-4 font-mono">404</h1>
-          <h2 className="text-2xl font-semibold text-white mb-4">Oops! Page Not Found</h2>
-          <p className="text-gray-300 mb-8 text-lg">
-            Looks like this monkey got lost in the digital jungle! The page you're looking for doesn't exist.
-          </p>
+          <h1 className="text-4xl font-bold text-white mb-4 font-mono">404</h1>
+          <h2 className="text-lg font-semibold text-white mb-4">Oops! Page Not Found</h2>
         </motion.div>
 
         {/* Go Back Button */}
@@ -85,9 +87,9 @@ const NotFound = () => {
           whileHover="hover"
           whileTap="tap"
           onClick={() => navigate('/')}
-          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform transition-all duration-200 text-lg"
+          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform transition-all duration-200 text-base border-2 border-white"
         >
-          🏠 Go Back Home
+          Go Back Home
         </motion.button>
       </div>
     </div>

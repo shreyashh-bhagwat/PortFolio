@@ -6,16 +6,12 @@ const LatestProjectSection = () => {
     <>
       <style>
         {`
-          @keyframes shimmer {
+          @keyframes shimmer-latest {
             0% {
-              background: linear-gradient(90deg, transparent 0%, rgba(255, 193, 7, 0.3) 30%, rgba(255, 152, 0, 0.5) 50%, rgba(255, 193, 7, 0.3) 70%, transparent 100%);
-              background-size: 200% 100%;
-              background-position: -200% 0;
+              transform: translateX(-100%) skewX(-20deg);
             }
             100% {
-              background: linear-gradient(90deg, transparent 0%, rgba(255, 193, 7, 0.3) 30%, rgba(255, 152, 0, 0.5) 50%, rgba(255, 193, 7, 0.3) 70%, transparent 100%);
-              background-size: 200% 100%;
-              background-position: 200% 0;
+              transform: translateX(250%) skewX(-20deg);
             }
           }
           .shine-overlay {
@@ -24,9 +20,12 @@ const LatestProjectSection = () => {
             left: 0;
             right: 0;
             bottom: 0;
-            animation: shimmer 3s ease-in-out infinite;
+            background: linear-gradient(110deg, transparent 20%, rgba(255, 193, 7, 0.4) 50%, transparent 80%);
+            animation: shimmer-latest 3s ease-in-out infinite;
             pointer-events: none;
             border-radius: 0.5rem;
+            width: 200%;
+            transform: translateX(-100%) skewX(-20deg);
           }
         `}
       </style>

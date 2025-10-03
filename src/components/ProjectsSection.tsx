@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { projects } from '../data/projects';
 import type { Project } from '../data/projects';
+import notFoundImage from '../assets/404.png';
 
 const ProjectsSection = () => {
   const [filter, setFilter] = useState<string>('UI/UX');
@@ -69,56 +70,75 @@ const ProjectsSection = () => {
         </div>
 
         {/* Project Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-md lg:max-w-7xl mx-auto">
-          {filteredProjects.map((project, index) => (
+        {filteredProjects.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-16">
             <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="card-elevated p-4"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-center"
             >
-              <img src={project.thumbnail} alt={project.title} className="w-full h-48 object-cover rounded-lg mb-4" />
-              <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-              <p className="text-gray-300 text-sm mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map((tech) => (
-                  <span key={tech} className="bg-white/20 text-white px-2 py-1 rounded text-xs">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <div className="flex justify-between items-center">
-                <button
-                  onClick={() => handleLike(project.id)}
-                  className={`text-xl transition-all duration-200 p-2 rounded-full hover:bg-white/10 ${
-                    likedProjects.has(project.id) 
-                      ? 'text-white' 
-                      : 'text-white/60 border border-white/40'
-                  }`}
-                >
-                  <svg 
-                    width="20" 
-                    height="20" 
-                    viewBox="0 0 24 24" 
-                    fill={likedProjects.has(project.id) ? "currentColor" : "none"}
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    className="transition-all duration-200"
-                  >
-                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3z"/>
-                  </svg>
-                </button>
-                <button
-                  onClick={() => handleViewMore(project)}
-                  className="bg-white hover:bg-gray-200 text-black px-4 py-2 rounded transition-colors"
-                >
-                  View More
-                </button>
-              </div>
+              <img 
+                src={notFoundImage} 
+                alt="No projects found" 
+                className="w-64 h-64 mx-auto mb-6 object-contain opacity-80"
+              />
+              <h3 className="text-xl font-semibold text-white mb-2">No Projects Found</h3>
+              <p className="text-gray-400 text-sm">There are no projects in this category yet.</p>
             </motion.div>
-          ))}
-        </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-md lg:max-w-7xl mx-auto">
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="card-elevated p-4"
+              >
+                <img src={project.thumbnail} alt={project.title} className="w-full h-48 object-cover rounded-lg mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
+                <p className="text-gray-300 text-sm mb-4">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tech.map((tech) => (
+                    <span key={tech} className="bg-white/20 text-white px-2 py-1 rounded text-xs">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex justify-between items-center">
+                  <button
+                    onClick={() => handleLike(project.id)}
+                    className={`text-xl transition-all duration-200 p-2 rounded-full hover:bg-white/10 ${
+                      likedProjects.has(project.id) 
+                        ? 'text-white' 
+                        : 'text-white/60 border border-white/40'
+                    }`}
+                  >
+                    <svg 
+                      width="20" 
+                      height="20" 
+                      viewBox="0 0 24 24" 
+                      fill={likedProjects.has(project.id) ? "currentColor" : "none"}
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      className="transition-all duration-200"
+                    >
+                      <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3z"/>
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => handleViewMore(project)}
+                    className="bg-white hover:bg-gray-200 text-black px-4 py-2 rounded transition-colors"
+                  >
+                    View More
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Confirmation Modal */}
@@ -238,16 +258,42 @@ const ProjectsSection = () => {
                     }
                     setShowConfirmModal(null);
                   }}
-                  className="flex items-center gap-2 px-6 py-3 bg-gray-700 hover:bg-gray-600 active:bg-gray-800 text-white rounded-xl transition-all duration-200 font-semibold text-sm shadow-sm hover:shadow-md transform hover:scale-105 active:scale-95"
+                  className="relative flex items-center gap-2 px-6 py-3 bg-gray-700 hover:bg-gray-600 active:bg-gray-800 text-white rounded-xl transition-all duration-200 font-semibold text-xs shadow-sm hover:shadow-md transform hover:scale-105 active:scale-95 whitespace-nowrap overflow-hidden"
+                  style={{
+                    position: 'relative',
+                    overflow: 'hidden'
+                  }}
                 >
+                  {/* Shimmer effect */}
+                  <div 
+                    className="absolute inset-0 animate-shimmer"
+                    style={{
+                      background: 'linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.5) 50%, transparent 80%)',
+                      animation: 'shimmer 2s infinite',
+                      transform: 'translateX(-250%) skewX(-20deg)',
+                      width: '200%'
+                    }}
+                  />
+                  <style>
+                    {`
+                      @keyframes shimmer {
+                        0% {
+                          transform: translateX(-100%) skewX(-20deg);
+                        }
+                        100% {
+                          transform: translateX(150%) skewX(-20deg);
+                        }
+                      }
+                    `}
+                  </style>
                   <svg
-                    className="w-5 h-5"
+                    className="w-5 h-5 relative z-10"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path d="M8 5v14l11-7z"/>
                   </svg>
-                  Watch Demo
+                  <span className="relative z-10">Watch Demo</span>
                 </button>
                 <button
                   onClick={() => {
@@ -256,7 +302,7 @@ const ProjectsSection = () => {
                     }
                     setShowConfirmModal(null);
                   }}
-                  className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white rounded-xl transition-all duration-200 font-semibold text-sm shadow-sm hover:shadow-md transform hover:scale-105 active:scale-95"
+                  className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white rounded-xl transition-all duration-200 font-semibold text-xs shadow-sm hover:shadow-md transform hover:scale-105 active:scale-95 whitespace-nowrap"
                 >
                   Open Project
                 </button>
