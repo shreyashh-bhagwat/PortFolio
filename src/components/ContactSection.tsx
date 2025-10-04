@@ -61,7 +61,8 @@ const ContactSection = () => {
           email: formData.email,
           subject: formData.subject,
           message: formData.message,
-          to_email: 'shreyashbhagwat0709@gmail.com',
+          // send to both primary Gmail and Zoho Mail
+          to_email: 'shreyashbhagwat0709@gmail.com,shreyashbhagwat@zohomail.in',
           date: new Date().toLocaleString('en-US', {
             dateStyle: 'medium',
             timeStyle: 'short'
@@ -99,7 +100,7 @@ const ContactSection = () => {
   };
 
   return (
-  <section id="contact" className="py-6 px-4 pb-32 mb-24 lg:px-0 lg:py-8 lg:pb-16 lg:mb-8">
+  <section id="contact" className="py-6 px-4 pb-32 mb-32 lg:px-0 lg:py-8 lg:pb-20 lg:mb-10">
       <div className="max-w-2xl mx-auto lg:max-w-none">
         <h2 className="text-3xl font-bold text-white text-center lg:text-left mb-10 lg:mb-8">Contact Me</h2>
 

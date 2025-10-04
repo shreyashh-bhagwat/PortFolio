@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AnimatedBackground from './components/AnimatedBackground';
 import HeroChatCard from './components/HeroChatCard';
@@ -16,10 +16,39 @@ import bgVideo from './assets/bg.mp4';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
   const handleLoadComplete = () => {
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    const applyPadding = () => {
+      const contentEl = contentRef.current;
+      const navbar = document.querySelector('.bottom-nav-container') as HTMLElement | null;
+      if (!contentEl) return;
+      if (navbar) {
+        const navHeight = navbar.offsetHeight + 16; // add small gap
+        contentEl.style.paddingBottom = `${navHeight + 24}px`; // ensure extra space for footer
+      } else {
+        contentEl.style.paddingBottom = '';
+      }
+    };
+
+    applyPadding();
+    window.addEventListener('resize', applyPadding);
+
+    // Observe DOM changes in case bottom nav height changes dynamically
+    const observer = new MutationObserver(() => applyPadding());
+    observer.observe(document.body, { attributes: true, childList: true, subtree: true });
+
+    const t = window.setTimeout(applyPadding, 300);
+    return () => {
+      window.removeEventListener('resize', applyPadding);
+      observer.disconnect();
+      clearTimeout(t);
+    };
+  }, [contentRef]);
 
   return (
     <Routes>
@@ -27,7 +56,8 @@ function App() {
         <div>
           {isLoading && <LoadingScreen onLoadComplete={handleLoadComplete} />}
           {!isLoading && (
-            <div className="pb-32">
+            <div className="pb-32" ref={contentRef}>
+              {/* contentRef is used to add bottom padding equal to bottom nav height so footer remains visible */}
               {/* Background Video */}
               <video
                 autoPlay
@@ -44,7 +74,7 @@ function App() {
 
               <AnimatedBackground />
 
-              {/* Row 1: Hero Section (left) + Connect With Me (right) */}
+              {/* Row 1: Hero Section (right) + Connect With Me (left) */}
               <section id="home" className="px-4 pb-0 pt-[7vh] mb-0 relative z-20">
                 <div className="max-w-7xl mx-auto">
                   {/* Mobile Layout */}
@@ -54,11 +84,11 @@ function App() {
                   
                   {/* Desktop Layout */}
                   <div className="hidden lg:grid lg:grid-cols-2 lg:gap-12 lg:items-start">
-                    <div className="flex justify-center">
-                      <HeroChatCard />
-                    </div>
                     <div className="relative z-30">
                       <SocialLinksSection />
+                    </div>
+                    <div className="flex justify-end">
+                      <HeroChatCard />
                     </div>
                   </div>
                 </div>
@@ -109,6 +139,8 @@ function App() {
                 </div>
               </div>
 
+              {/* Spacer to ensure footer sits below the fixed bottom nav (reduced) */}
+              <div style={{ height: 64 }} className="w-full" aria-hidden="true" />
               <div className="relative z-70 mb-20">
                 <Footer />
               </div>

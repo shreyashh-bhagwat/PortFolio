@@ -203,17 +203,17 @@ const ProjectsSection = () => {
                     strokeWidth={3}
                   >
                     <motion.path
+                      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"
                       initial={{ pathLength: 0 }}
                       animate={{ pathLength: 1 }}
                       transition={{ delay: 0.5, duration: 0.8, ease: "easeInOut" }}
                     />
                     <motion.path
+                      d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z"
                       initial={{ pathLength: 0 }}
                       animate={{ pathLength: 1 }}
                       transition={{ delay: 0.6, duration: 0.8, ease: "easeInOut" }}
@@ -268,20 +268,20 @@ const ProjectsSection = () => {
                   <div 
                     className="absolute inset-0 animate-shimmer"
                     style={{
-                      background: 'linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.5) 50%, transparent 80%)',
-                      animation: 'shimmer 2s infinite',
-                      transform: 'translateX(-250%) skewX(-20deg)',
-                      width: '200%'
+                      background: 'linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.85) 50%, transparent 80%)',
+                      animation: 'shimmer 1.2s linear infinite',
+                      transform: 'translateX(-200%) skewX(-20deg)',
+                      width: '220%'
                     }}
                   />
                   <style>
                     {`
                       @keyframes shimmer {
                         0% {
-                          transform: translateX(-100%) skewX(-20deg);
+                          transform: translateX(-120%) skewX(-20deg);
                         }
                         100% {
-                          transform: translateX(150%) skewX(-20deg);
+                          transform: translateX(140%) skewX(-20deg);
                         }
                       }
                     `}

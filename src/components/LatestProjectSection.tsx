@@ -11,7 +11,7 @@ const LatestProjectSection = () => {
               transform: translateX(-100%) skewX(-20deg);
             }
             100% {
-              transform: translateX(250%) skewX(-20deg);
+              transform: translateX(120%) skewX(-20deg);
             }
           }
           .shine-overlay {
@@ -20,39 +20,43 @@ const LatestProjectSection = () => {
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(110deg, transparent 20%, rgba(255, 193, 7, 0.4) 50%, transparent 80%);
-            animation: shimmer-latest 3s ease-in-out infinite;
+            /* polished warm-gold highlight with a narrow bright-white core */
+            background: linear-gradient(110deg,
+              rgba(255,255,255,0) 8%,
+              rgba(215, 163, 8, 0.64) 46%,
+              rgba(255, 194, 25, 0.37) 54%,
+              rgba(255,255,255,0) 92%
+            );
+            /* snappier shimmer so the highlight reads clearly */
+            animation: shimmer-latest 1.2s linear infinite;
             pointer-events: none;
             border-radius: 0.5rem;
-            width: 200%;
+            width: 180%;
             transform: translateX(-100%) skewX(-20deg);
+            /* make the shine visually brighter over the card */
+            mix-blend-mode: screen;
           }
         `}
       </style>
       <section className="py-6 px-4 relative">
         <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+          <div
             className="bg-gradient-to-br from-yellow-500/10 via-orange-500/10 to-yellow-500/10 backdrop-blur-md rounded-lg py-5 px-4 shadow-xl border border-yellow-500/20 relative overflow-hidden"
             style={{
               background: 'linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 50%, rgba(255, 193, 7, 0.1) 100%)',
               backdropFilter: 'blur(10px)',
-              boxShadow: '0 8px 32px 0 rgba(255, 193, 7, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
             }}
           >
             <div className="shine-overlay"></div>
             <div className="flex items-center justify-between relative z-10">
-              <h3 className="text-base font-bold text-white">
+              <h3 className="text-sm font-medium text-white">
                 Watchout my Latest Project
               </h3>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.open(latestProject.deployedUrl, '_blank')}
-                className="bg-white hover:bg-gray-50 text-black font-semibold py-2 px-4 rounded-md transition-all duration-200 shadow-lg hover:shadow-xl text-sm border border-gray-200 flex items-center gap-2"
+                className="bg-white hover:bg-gray-50 text-black font-medium py-1 px-3 rounded-md transition-all duration-200 shadow-lg hover:shadow-xl text-xs border border-gray-200 flex items-center gap-2"
               >
                 <span>Open</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,7 +64,7 @@ const LatestProjectSection = () => {
                 </svg>
               </motion.button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </>

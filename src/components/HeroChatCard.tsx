@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import logo from '../assets/logo.png';
+import introAudio from '../assets/audio/sample.mp3';
 
 const HeroChatCard = () => {
   const [displayText, setDisplayText] = useState('');
   const fullText = "Hi — I'm Shreyash. I'm a UI/UX Designer & Frontend Developer from Kopargaon, Maharashtra. With 2+ years of experience and 50+ completed projects, I design clean, user-first interfaces that convert.";
   const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [runShimmer, setRunShimmer] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -22,6 +24,33 @@ const HeroChatCard = () => {
       document.head.removeChild(style);
     };
   }, []);
+
+  // Start shimmer only after typing completes and the helper text has had a frame to render
+  useEffect(() => {
+    let raf1: number | null = null;
+    let raf2: number | null = null;
+    let timeoutId: number | null = null;
+    if (isTypingComplete) {
+      // The helper motion span uses transition: delay 0.3s, duration 0.5s -> total 800ms
+      // Wait for that reveal animation to finish, then wait two RAFs to ensure DOM paint
+      const helperRevealMs = 800;
+      timeoutId = window.setTimeout(() => {
+        raf1 = requestAnimationFrame(() => {
+          raf2 = requestAnimationFrame(() => {
+            setRunShimmer(true);
+          });
+        });
+      }, helperRevealMs);
+    } else {
+      setRunShimmer(false);
+    }
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      if (raf1) cancelAnimationFrame(raf1);
+      if (raf2) cancelAnimationFrame(raf2);
+    };
+  }, [isTypingComplete]);
 
   // Internal CSS styles
   const styles = {
@@ -187,10 +216,52 @@ const HeroChatCard = () => {
                   marginTop: '0.5rem',
                   fontSize: '0.625rem',
                   color: '#9ca3af',
-                  fontStyle: 'italic'
+                  fontStyle: 'italic',
+                  position: 'relative',
+                  overflow: 'visible'
                 }}
               >
-                Click the speaker to hear my introduction in मराठी 🎵
+                {/* Solid base text */}
+                <span style={{ position: 'relative', zIndex: 1, color: '#9ca3af', display: 'inline-block', padding: '0.125rem 0.5rem', whiteSpace: 'nowrap' }}>
+                  Click the speaker to hear my introduction in मराठी 🎵
+                </span>
+
+                {/* Gradient text layer (absolute) clipped to glyphs so shimmer appears only inside text) */}
+                <span
+                    aria-hidden="true"
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    zIndex: 2,
+                    display: 'inline-block',
+                    padding: '0.125rem 0.5rem',
+                    pointerEvents: 'none',
+                    whiteSpace: 'nowrap',
+                    width: '100%',
+                    boxSizing: 'content-box',
+                    /* narrower, brighter core with warm-gold halo for clearer highlight */
+                    background: 'linear-gradient(110deg, rgba(255,255,255,0) 45%, rgba(255,255,255,1) 49%, rgba(250, 250, 249, 1) 51%, rgba(255, 255, 255, 1) 55%)',
+                    /* smaller backgroundSize makes the moving highlight narrower and easier to spot */
+                    backgroundSize: '250% 100%',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    color: 'transparent',
+                    animation: runShimmer ? 'shimmer-text 4s ease-in-out forwards' : 'none'
+                  }}
+                >
+                  Click the speaker to hear my introduction in मराठी 🎵
+                </span>
+
+                <style>
+                  {`@keyframes shimmer-text {
+                      0% { background-position: 150% 0; opacity: 1; }
+                      60% { background-position: -20% 0; opacity: 1; }
+                      100% { background-position: -150% 0; opacity: 0; }
+                    }
+                  `}
+                </style>
               </motion.span>
             </>
           )}
@@ -199,11 +270,10 @@ const HeroChatCard = () => {
         {/* Hidden audio element */}
         <audio
           ref={audioRef}
+          src={introAudio}
           preload="none"
           onEnded={() => setIsMuted(true)}
         >
-          <source src="/assets/audio/intro.mp3" type="audio/mpeg" />
-          <source src="/assets/audio/intro.wav" type="audio/wav" />
           Your browser does not support the audio element.
         </audio>
       </div>
