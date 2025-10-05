@@ -28,7 +28,7 @@ export const projects: Project[] = [
     tech: ['Figma', 'UI/UX Design', 'Prototyping'],
     views: 267,
     likes: 89,
-    href: 'https://www.behance.net/gallery/12345678/Bring-It-Quick-Commerce-App',
+    href: 'https://www.behance.net/gallery/214665803/Bring-it-A-Quick-Commerce-App-Prototype',
     demoVideoUrl: 'https://www.youtube.com/watch?v=demo1',
   },
   {
@@ -40,7 +40,7 @@ export const projects: Project[] = [
     tech: ['Figma', 'UI Design', 'Dashboard Design'],
     views: 198,
     likes: 67,
-    href: 'https://www.behance.net/gallery/12345679/SmartHarvest-Tax-Platform',
+    href: 'https://www.behance.net/gallery/230389461/SmartHarvest-Save-your-Money-with-Tax-Harvesting',
     demoVideoUrl: 'https://www.youtube.com/watch?v=demo2',
   },
   {
@@ -97,7 +97,7 @@ export const latestProject = {
   title: 'Ashtavinayak Enterprises',
   description: 'A modern business website for Ashtavinayak Enterprises featuring responsive design, service showcase, and contact integration.',
   thumbnail: ashtavinayak,
-  deployedUrl: 'https://ashtavinayak-enterprises.com/',
+  deployedUrl: 'https://ashtavinayak.enterprises',
   tech: ['React.js', 'Responsive Design', 'Modern UI'],
   features: ['Modern UI design', 'Service portfolio', 'Contact forms', 'Mobile responsive']
 };

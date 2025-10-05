@@ -74,21 +74,26 @@ function App() {
 
               <AnimatedBackground />
 
-              {/* Row 1: Hero Section (right) + Connect With Me (left) */}
+              {/* Row 1: Hero Section (left) + Connect With Me (right) */}
               <section id="home" className="px-4 pb-0 pt-[7vh] mb-0 relative z-20">
                 <div className="max-w-7xl mx-auto">
-                  {/* Mobile Layout */}
-                  <div className="lg:hidden flex items-start justify-center">
+                  {/* Mobile Layout - Only Hero */}
+                  <div className="mobile-hero-only">
                     <HeroChatCard />
                   </div>
                   
-                  {/* Desktop Layout */}
-                  <div className="hidden lg:grid lg:grid-cols-2 lg:gap-12 lg:items-start">
+                  {/* Desktop Layout - Hero left, Connect right */}
+                  <div style={{ 
+                    display: 'none',
+                    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                    gap: '3rem',
+                    alignItems: 'start'
+                  }} className="desktop-row-1">
+                    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                      <HeroChatCard />
+                    </div>
                     <div className="relative z-30">
                       <SocialLinksSection />
-                    </div>
-                    <div className="flex justify-end">
-                      <HeroChatCard />
                     </div>
                   </div>
                 </div>
@@ -100,7 +105,7 @@ function App() {
               </div>
 
               {/* Mobile Connect With Me (only shown on mobile) */}
-              <div className="lg:hidden relative z-30">
+              <div className="mobile-social-only relative z-30">
                 <SocialLinksSection />
               </div>
 
@@ -114,11 +119,11 @@ function App() {
                 <BusinessProjectSection />
               </div>
 
-              {/* Row 4: Hire Me (left) + Contact Form (right) */}
+              {/* Row 4: Hire Me (left) + Contact Form (right) on desktop */}
               <div className="relative z-50 px-4">
                 <div className="max-w-7xl mx-auto">
-                  {/* Mobile Layout */}
-                  <div className="lg:hidden">
+                  {/* Mobile Layout - keep original order */}
+                  <div className="mobile-contact-hire">
                     <div className="relative z-60">
                       <HireMeSection />
                     </div>
@@ -127,8 +132,13 @@ function App() {
                     </div>
                   </div>
                   
-                  {/* Desktop Layout */}
-                  <div className="hidden lg:grid lg:grid-cols-2 lg:gap-12 lg:items-start">
+                  {/* Desktop Layout - Hire Me left, Contact right */}
+                  <div style={{ 
+                    display: 'none',
+                    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                    gap: '3rem',
+                    alignItems: 'start'
+                  }} className="desktop-contact-hire">
                     <div className="relative z-60">
                       <HireMeSection />
                     </div>

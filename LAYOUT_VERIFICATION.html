@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white p-8">
+    <h1 class="text-3xl font-bold mb-8">Desktop Layout Verification</h1>
+    <p class="mb-4">Resize browser to 1024px+ to see desktop layout</p>
+    
+    <div class="space-y-8">
+        <!-- Row 1: Social (left) + Hero (right) -->
+        <section class="border-2 border-blue-500 p-4">
+            <h2 class="text-xl mb-4">Row 1: Hero Section</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div class="bg-blue-900 p-8 text-center">Social Links (LEFT)</div>
+                <div class="bg-green-900 p-8 text-center">Hero Chat Card (RIGHT)</div>
+            </div>
+        </section>
+
+        <!-- Latest Project -->
+        <section class="border-2 border-yellow-500 p-4">
+            <h2 class="text-xl mb-4">Row 2: Latest Project</h2>
+            <div class="bg-yellow-900 p-8 text-center">Latest Project Banner (FULL WIDTH)</div>
+        </section>
+
+        <!-- Projects Grid - 4 columns on desktop -->
+        <section class="border-2 border-purple-500 p-4">
+            <h2 class="text-xl mb-4">Row 3: Projects (4 per row on desktop)</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                <div class="bg-purple-900 p-8 text-center">Project 1</div>
+                <div class="bg-purple-900 p-8 text-center">Project 2</div>
+                <div class="bg-purple-900 p-8 text-center">Project 3</div>
+                <div class="bg-purple-900 p-8 text-center">Project 4</div>
+            </div>
+        </section>
+
+        <!-- Business Section -->
+        <section class="border-2 border-red-500 p-4">
+            <h2 class="text-xl mb-4">Row 4: Business Projects</h2>
+            <div class="bg-red-900 p-8 text-center">Business Projects Section (FULL WIDTH)</div>
+        </section>
+
+        <!-- Contact (left) + Hire Me (right) -->
+        <section class="border-2 border-green-500 p-4">
+            <h2 class="text-xl mb-4">Row 5: Contact + Hire Me</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div class="bg-pink-900 p-8 text-center">Contact Form (LEFT)</div>
+                <div class="bg-orange-900 p-8 text-center">Hire Me (RIGHT)</div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <section class="border-2 border-gray-500 p-4">
+            <h2 class="text-xl mb-4">Row 6: Footer</h2>
+            <div class="bg-gray-800 p-8 text-center">Footer (FULL WIDTH)</div>
+        </section>
+    </div>
+
+    <div class="mt-8 p-4 bg-blue-900 rounded">
+        <p class="font-bold">Current viewport width: <span id="width"></span>px</p>
+        <p class="mt-2">Desktop layout (2 columns) activates at 1024px+ width</p>
+    </div>
+
+    <script>
+        function updateWidth() {
+            document.getElementById('width').textContent = window.innerWidth;
+        }
+        updateWidth();
+        window.addEventListener('resize', updateWidth);
+    </script>
+</body>
+</html>

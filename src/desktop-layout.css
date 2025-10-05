@@ -1,0 +1,171 @@
+/* Desktop Layout CSS - Applied at 1024px and above */
+
+/* Mobile first - hide desktop layouts by default */
+.desktop-row-1,
+.desktop-contact-hire {
+  display: none;
+}
+
+.mobile-contact-hire,
+.mobile-hero-only,
+.mobile-social-only {
+  display: block;
+}
+
+.mobile-hero-only {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Desktop breakpoint - 1024px and above */
+@media (min-width: 1024px) {
+  /* Show desktop layouts */
+  .desktop-row-1,
+  .desktop-contact-hire {
+    display: grid !important;
+  }
+  
+  /* Hide mobile layouts */
+  .mobile-contact-hire,
+  .mobile-hero-only,
+  .mobile-social-only {
+    display: none !important;
+  }
+  
+  /* Row 1: Connect left, Hero right */
+  .desktop-row-1 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem;
+    align-items: start;
+  }
+  
+  /* Increase size of Hero section elements on desktop */
+  .desktop-row-1 > div:first-child > div {
+    transform: scale(1.15) !important;
+    transform-origin: center !important;
+  }
+  
+  .desktop-row-1 > div:first-child * {
+    font-size: 1.2em !important;
+  }
+  
+  .desktop-row-1 > div:first-child h1 {
+    font-size: 2.5em !important;
+  }
+  
+  .desktop-row-1 > div:first-child p {
+    font-size: 1.3em !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* Increase size of Social Links section on desktop */
+  .desktop-row-1 > div:last-child section {
+    transform: scale(1.2) !important;
+    transform-origin: center !important;
+  }
+  
+  .desktop-row-1 > div:last-child h2 {
+    font-size: 2.2em !important;
+  }
+  
+  .desktop-row-1 > div:last-child a {
+    padding: 1rem 1.5rem !important;
+    font-size: 1.2em !important;
+  }
+  
+  .desktop-row-1 > div:last-child svg {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+  
+  /* Row 4: Contact left, Hire Me right */
+  .desktop-contact-hire {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem;
+    align-items: start;
+  }
+  
+  /* Projects Section - 3 columns on desktop with perfect card width */
+  .projects-grid-desktop {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 1.5rem !important;
+    max-width: 80rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+  }
+  
+  /* Uniform project card dimensions on desktop */
+  .projects-grid-desktop > div {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  .projects-grid-desktop .card-elevated {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 400px !important;
+  }
+  
+  .projects-grid-desktop .card-elevated > img {
+    height: 192px !important;
+    flex-shrink: 0 !important;
+  }
+  
+  .projects-grid-desktop .card-elevated > h3 {
+    min-height: 3.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  .projects-grid-desktop .card-elevated > p {
+    flex: 1 !important;
+    min-height: 3rem !important;
+  }
+  
+  .projects-grid-desktop .card-elevated > div:first-of-type {
+    min-height: 2.5rem !important;
+  }
+  
+  /* Social Links - vertical stack on desktop */
+  .social-links-desktop {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    max-width: none;
+  }
+}
+
+/* Mobile - below 1024px */
+@media (max-width: 1023px) {
+  .desktop-row-1,
+  .desktop-contact-hire {
+    display: none !important;
+  }
+  
+  .mobile-contact-hire,
+  .mobile-hero-only,
+  .mobile-social-only {
+    display: block !important;
+  }
+  
+  .mobile-hero-only {
+    display: flex !important;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  /* Projects Section - 1 column on mobile */
+  .projects-grid-desktop {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    max-width: 28rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}

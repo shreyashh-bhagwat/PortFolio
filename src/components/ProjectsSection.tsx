@@ -88,7 +88,7 @@ const ProjectsSection = () => {
             </motion.div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-md lg:max-w-7xl mx-auto">
+          <div className="projects-grid-desktop">
             {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
