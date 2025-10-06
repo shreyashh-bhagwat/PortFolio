@@ -18,7 +18,7 @@ const ContactSection = () => {
   };
 
   const handleWhatsAppRedirect = () => {
-    const phoneNumber = '9850829389';
+      const phoneNumber = '8551862526';
     const message = 'Hi Shreyash! I just sent you a message through your portfolio website. This is urgent - please check your email.';
     const whatsappUrl = `https://wa.me/91${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
